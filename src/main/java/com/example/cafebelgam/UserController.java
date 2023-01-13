@@ -266,7 +266,7 @@ public class UserController implements Initializable {
                 alert.setContentText("Fill blanks");
                 alert.showAndWait();
             }else {
-
+                if(reservations_tableView.getItems().isEmpty()){
                 
 
                 String setData = "UPDATE tables SET status = 'Reserved' WHERE id = '" + reservations_tableNumber.getSelectionModel().getSelectedItem() + "'";
@@ -308,7 +308,13 @@ public class UserController implements Initializable {
 
                     reservationsDisplayData();
                     reservationTableNumber();
-                }
+                }else{
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("You have reservation yet");
+                    alert.showAndWait();
+            }}
 
         }catch(Exception e){
             e.printStackTrace();
@@ -359,14 +365,17 @@ public class UserController implements Initializable {
         try{
 
             Alert alert;
-            if(reservations_tableView.getColumns().isEmpty()){
+
+            if(reservations_tableView.getItems().isEmpty()){
 
                 alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
+                alert.setTitle("");
                 alert.setHeaderText(null);
-                alert.setContentText("Fill blanks");
+                alert.setContentText("You don't have any reservation");
                 alert.showAndWait();
-            }else {
+
+            }else{
+
                 alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("");
                 alert.setHeaderText(null);
@@ -396,6 +405,7 @@ public class UserController implements Initializable {
                     alert.showAndWait();
                 }
             }
+
 
         }catch(Exception e){
             e.printStackTrace();
