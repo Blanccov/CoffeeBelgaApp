@@ -101,6 +101,8 @@ public class HelloController implements Initializable {
 
         String sql = "INSERT INTO user ( email, username, password) VALUES(?,?,?)";
 
+        String sql_validation = "SELECT COUNT(username) FROM user WHERE username= '" + signUp_username.getText() + "'";
+
         connection = Database.connectDb();
 
         try{
@@ -128,7 +130,21 @@ public class HelloController implements Initializable {
                 alert.setContentText("Password needs 8 characters ");
                 alert.showAndWait();
             }else {
+                int usernameCount = 0;
                 if (checkEmail()) {
+                        statement = connection.createStatement();
+                        result = statement.executeQuery(sql_validation);
+                        if(result.next()) {
+                            usernameCount = result.getInt("COUNT(username)");
+                        }
+                    if(usernameCount !=0) {
+                        alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("This username was already exist");
+                        alert.showAndWait();
+                        System.out.println("wiecej niz 0");
+                    }else{
 
                         prepared.execute();
 
@@ -141,7 +157,7 @@ public class HelloController implements Initializable {
                     signUp_email.setText("");
                     signUp_username.setText("");
                     signUp_password.setText("");
-                } else {
+                }} else {
                     alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText(null);
