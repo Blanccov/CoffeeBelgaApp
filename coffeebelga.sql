@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 12 Sty 2023, 18:43
+-- Czas generowania: 15 Sty 2023, 15:41
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.1.12
 
@@ -53,6 +53,15 @@ CREATE TABLE `menu` (
   `price` double NOT NULL,
   `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Zrzut danych tabeli `menu`
+--
+
+INSERT INTO `menu` (`id`, `product_name`, `type`, `price`, `status`) VALUES
+(1, 'Makaron', 'Meals', 12, 'Available'),
+(2, 'Ser', 'Meals', 9, 'Available'),
+(3, 'Pizzunia Big', 'Meals', 32, 'Available');
 
 -- --------------------------------------------------------
 
@@ -107,8 +116,7 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`id`, `user_id`, `type`, `status`, `date`) VALUES
-(3, 3, '2 - person', 'Reserved', '2023-01-12'),
-(5, 3, '2 - person', 'Reserved', '2023-01-12');
+(1, 3, '2 - person', 'Reserved', '2023-01-13');
 
 -- --------------------------------------------------------
 
@@ -128,10 +136,10 @@ CREATE TABLE `tables` (
 --
 
 INSERT INTO `tables` (`id`, `type`, `status`, `user_id`) VALUES
-(1, '2 - person', 'Not reserved', 1),
-(3, '2 - person', 'Reserved', 3),
+(1, '2 - person', 'Reserved', 3),
+(3, '2 - person', 'Not reserved', 1),
 (4, '2 - person', 'Not reserved', 1),
-(5, '2 - person', 'Reserved', 3),
+(5, '2 - person', 'Not reserved', 1),
 (54, '2 - person', 'Not reserved', 1);
 
 -- --------------------------------------------------------
@@ -212,10 +220,16 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT dla tabeli `menu`
+--
+ALTER TABLE `menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT dla tabeli `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT dla tabeli `reservations`
@@ -237,8 +251,8 @@ ALTER TABLE `user`
 -- Ograniczenia dla tabeli `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `menu` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`product_id`) REFERENCES `menu` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `product`

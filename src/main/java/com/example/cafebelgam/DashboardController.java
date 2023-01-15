@@ -481,22 +481,20 @@ public class DashboardController implements Initializable {
 
     public void menuAdd(){
 
-        String sql = "INSERT INTO menu (id, product_name, type, price, status)" + "VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO menu (product_name, type, price, status)" + "VALUES(?, ?, ?, ?)";
 
         connection = Database.connectDb();
 
         try{
             prepared = connection.prepareStatement(sql);
-            prepared.setString(1, menu_productID.getText());
-            prepared.setString(2, menu_productName.getText());
-            prepared.setString(3, (String) menu_type.getSelectionModel().getSelectedItem());
-            prepared.setString(4, menu_price.getText());
-            prepared.setString(5, (String) menu_status.getSelectionModel().getSelectedItem());
+            prepared.setString(1, menu_productName.getText());
+            prepared.setString(2, (String) menu_type.getSelectionModel().getSelectedItem());
+            prepared.setString(3, menu_price.getText());
+            prepared.setString(4, (String) menu_status.getSelectionModel().getSelectedItem());
 
             Alert alert;
 
-            if(menu_productID.getText().isEmpty()
-                || menu_productName.getText().isEmpty()
+            if(menu_productName.getText().isEmpty()
                     || menu_type.getSelectionModel().getSelectedItem() == null
                     || menu_price.getText().isEmpty()
                     || menu_status.getSelectionModel().getSelectedItem() == null){
@@ -508,7 +506,7 @@ public class DashboardController implements Initializable {
                 alert.showAndWait();
             } else{
 
-                String checkData = "SELECT id FROM menu WHERE id = '" + menu_productID.getText() + "'";
+                String checkData = "SELECT id FROM menu WHERE product_name = '" + menu_productName.getText() + "'";
                 connection = Database.connectDb();
 
                 statement = connection.createStatement();
@@ -518,7 +516,7 @@ public class DashboardController implements Initializable {
                     alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText(null);
-                    alert.setContentText("Product ID: " + menu_productID.getText() + " is existing");
+                    alert.setContentText(menu_productName.getText() + " is existing");
                     alert.showAndWait();
                 }else{
                     prepared.executeUpdate();
@@ -526,7 +524,7 @@ public class DashboardController implements Initializable {
                     alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Information");
                     alert.setHeaderText(null);
-                    alert.setContentText(menu_productID.getText() + " is added");
+                    alert.setContentText(menu_productName.getText() + " is added");
                     alert.showAndWait();
 
                     //SHOW DATA AFTER ADD
@@ -540,6 +538,8 @@ public class DashboardController implements Initializable {
             e.printStackTrace();
         }
     }
+
+
 
     //UPDATE DATABASE LIST
 
