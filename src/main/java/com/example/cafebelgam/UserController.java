@@ -27,32 +27,12 @@ import java.util.*;
 
 public class UserController implements Initializable {
 
-    @FXML
-    private Button close;
 
     @FXML
     private Button coupons_btn;
 
     @FXML
-    private TableColumn<Menus, String> coupons_col_couponName;
-
-    @FXML
-    private TableColumn<Menus, String> coupons_col_price;
-
-    @FXML
-    private TableColumn<Menus, String> coupons_col_productName;
-
-    @FXML
-    private TableColumn<Menus, String> coupons_col_status;
-
-    @FXML
     private AnchorPane coupons_form;
-
-    @FXML
-    private TextField coupons_search;
-
-    @FXML
-    private TableView<?> coupons_tableView;
 
     @FXML
     private Button menu_btn;

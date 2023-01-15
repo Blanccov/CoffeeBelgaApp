@@ -222,14 +222,12 @@
                <children>
                   <AnchorPane layoutX="38.0" layoutY="14.0" prefHeight="482.0" prefWidth="260.0" styleClass="bg-white" stylesheets="@designMainpanel.css">
                      <children>
-                        <Label layoutX="14.0" layoutY="46.0" text="Product ID:" />
-                        <TextField fx:id="menu_productID" layoutX="101.0" layoutY="42.0" />
                         <Label layoutX="4.0" layoutY="85.0" text="Product Name:" />
                         <TextField fx:id="menu_productName" layoutX="102.0" layoutY="81.0" />
                         <Label layoutX="30.0" layoutY="120.0" text="Type:" />
                         <Button fx:id="menu_add" layoutX="33.0" layoutY="241.0" mnemonicParsing="false" onAction="#menuAdd" prefHeight="45.0" prefWidth="79.0" styleClass="menu-btn" stylesheets="@designMainpanel.css" text="Add" />
                         <TextField fx:id="menu_price" layoutX="101.0" layoutY="151.0" />
-                        <Label layoutX="30.0" layoutY="155.0" text="Price:" />
+                        <Label layoutX="30.0" layoutY="155.0" text="Price(PLN):" />
                         <ComboBox fx:id="menu_type" layoutX="101.0" layoutY="116.0" prefWidth="150.0" promptText="Choose" />
                         <ComboBox fx:id="menu_status" layoutX="101.0" layoutY="186.0" prefWidth="150.0" promptText="Choose" />
                         <Label layoutX="26.0" layoutY="190.0" text="Status:" />
@@ -342,17 +340,17 @@
                      <children>
                         <TableView fx:id="customers_tableView" layoutX="6.0" layoutY="60.0" prefHeight="406.0" prefWidth="834.0">
                            <columns>
-                              <TableColumn fx:id="customers_col_customerId" prefWidth="34.40004348754883" text="ID" />
-                              <TableColumn fx:id="customers_col_userID" prefWidth="50.4000244140625" text="User ID" />
-                              <TableColumn fx:id="customers_col_productID" prefWidth="68.79998779296875" text="Product ID" />
+                              <TableColumn fx:id="customers_col_customerId" prefWidth="44.799991607666016" text="ID!" />
+                              <TableColumn fx:id="customers_col_userID" prefWidth="46.4000244140625" text="User ID" />
+                              <TableColumn fx:id="customers_col_productID" prefWidth="66.39996337890625" text="Product ID" />
                               <TableColumn fx:id="customers_col_productName" prefWidth="92.79997253417969" text="Product Name" />
                               <TableColumn fx:id="customers_col_type" prefWidth="66.39990234375" text="Type" />
                               <TableColumn fx:id="customers_col_price" prefWidth="48.0" text="Price" />
                               <TableColumn fx:id="customers_col_quantity" prefWidth="64.7999267578125" text="Quantity" />
                               <TableColumn fx:id="customers_col_phone" prefWidth="70.400146484375" text="Phone" />
-                              <TableColumn fx:id="customers_col_address" prefWidth="199.9998779296875" text="Address" />
-                              <TableColumn fx:id="customers_col_date" minWidth="7.199951171875" prefWidth="74.39990234375" text="Date" />
-                              <TableColumn fx:id="customers_col_relase" prefWidth="71.99993896484375" text="Relase" />
+                              <TableColumn fx:id="customers_col_address" prefWidth="157.5999755859375" text="Address" />
+                              <TableColumn fx:id="customers_col_date" minWidth="7.199951171875" prefWidth="91.199951171875" text="Date" />
+                              <TableColumn fx:id="customers_col_relase" prefWidth="100.800048828125" text="Relase" />
                            </columns>
                         </TableView>
                         <ComboBox fx:id="customers_relase" layoutX="356.0" layoutY="14.0" onAction="#statusStatus" prefWidth="150.0" promptText="Release..." />

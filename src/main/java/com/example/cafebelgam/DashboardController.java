@@ -206,8 +206,6 @@ public class DashboardController implements Initializable {
     @FXML
     private TextField menu_price;
 
-    @FXML
-    private TextField menu_productID;
 
     @FXML
     private TextField menu_productName;
@@ -300,13 +298,13 @@ public class DashboardController implements Initializable {
     private Button reservation_delete;
 
     @FXML
-    private ComboBox<?> reservation_status;
+    private ComboBox<String> reservation_status;
 
     @FXML
     private TextField reservation_tableNumber;
 
     @FXML
-    private ComboBox<?> reservation_type;
+    private ComboBox<String> reservation_type;
 
     @FXML
     private Button reservation_update;
@@ -548,7 +546,7 @@ public class DashboardController implements Initializable {
                 "', type ='" + menu_type.getSelectionModel().getSelectedItem() +
                 "', price = '" + menu_price.getText() +
                 "', status = '" + menu_status.getSelectionModel().getSelectedItem() +
-                "' WHERE product_id = '" + menu_productID.getText() + "'";
+                "' WHERE product_name = '" + menu_productName.getText() + "'";
 
         connection = Database.connectDb();
 
@@ -558,8 +556,7 @@ public class DashboardController implements Initializable {
 
             Alert alert;
 
-            if(menu_productID.getText().isEmpty()
-                    || menu_productName.getText().isEmpty()
+            if(menu_productName.getText().isEmpty()
                     || menu_type.getSelectionModel().getSelectedItem() == null
                     || menu_price.getText().isEmpty()
                     || menu_status.getSelectionModel().getSelectedItem() == null){
@@ -573,7 +570,7 @@ public class DashboardController implements Initializable {
                 alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("");
                 alert.setHeaderText(null);
-                alert.setContentText("Do you want to update product " + menu_productID.getText() + "?");
+                alert.setContentText("Do you want to update product " + menu_productName.getText() + "?");
                 Optional<ButtonType> option = alert.showAndWait();
 
                 if(option.get().equals(ButtonType.OK)){
@@ -607,7 +604,6 @@ public class DashboardController implements Initializable {
     // CLEAR FIELDS
     public void menuClear(){
 
-        menu_productID.setText("");
         menu_productName.setText("");
         menu_type.getSelectionModel().clearSelection();
         menu_price.setText("");
@@ -617,7 +613,7 @@ public class DashboardController implements Initializable {
     // DELETE ITEM FORM DATABASE
 
     public void menuDelete(){
-        String sql = "DELETE FROM menu WHERE product_id = '" + menu_productID.getText() + "'";
+        String sql = "DELETE FROM menu WHERE product_name = '" + menu_productName.getText() + "'";
 
         connection = Database.connectDb();
 
@@ -625,8 +621,7 @@ public class DashboardController implements Initializable {
 
             Alert alert;
 
-            if(menu_productID.getText().isEmpty()
-                    || menu_productName.getText().isEmpty()
+            if(menu_productName.getText().isEmpty()
                     || menu_type.getSelectionModel() == null
                     || menu_price.getText().isEmpty()
                     || menu_status.getSelectionModel() == null){
@@ -640,7 +635,7 @@ public class DashboardController implements Initializable {
                 alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("");
                 alert.setHeaderText(null);
-                alert.setContentText("Do you want to delete product " + menu_productID.getText() + "?");
+                alert.setContentText("Do you want to delete product " + menu_productName.getText() + "?");
                 Optional<ButtonType> option = alert.showAndWait();
 
                 if(option.get().equals(ButtonType.OK)){
@@ -727,11 +722,10 @@ public class DashboardController implements Initializable {
             return;
         }
 
-        menu_productID.setText(menu.getProductId());
         menu_productName.setText(menu.getProductName());
         menu_price.setText(String.valueOf(menu.getPrice()));
-        menu_type.setPromptText(String.valueOf(menu.getType()));
-        menu_status.setPromptText(String.valueOf(menu.getStatus()));
+        menu_type.setValue(String.valueOf(menu.getType()));
+        menu_status.setValue(String.valueOf(menu.getStatus()));
     }
 
 
@@ -855,7 +849,7 @@ public class DashboardController implements Initializable {
                 alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("");
                 alert.setHeaderText(null);
-                alert.setContentText("Do you want to update product " + menu_productID.getText() + "?");
+                alert.setContentText("Do you want to update reservation " + menu_productName.getText() + "?");
                 Optional<ButtonType> option = alert.showAndWait();
 
                 if(option.get().equals(ButtonType.OK)){
@@ -1000,8 +994,8 @@ public class DashboardController implements Initializable {
         }
 
         reservation_tableNumber.setText(String.valueOf(table.getTableNumber()));
-        reservation_type.setPromptText(String.valueOf(table.getType()));
-        reservation_status.setPromptText(String.valueOf(table.getStatus()));
+        reservation_type.setValue(String.valueOf(table.getType()));
+        reservation_status.setValue(String.valueOf(table.getStatus()));
     }
 
 
@@ -1550,7 +1544,7 @@ public class DashboardController implements Initializable {
                 alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("");
                 alert.setHeaderText(null);
-                alert.setContentText("Do you want to update product " + menu_productID.getText() + "?");
+                alert.setContentText("Do you want to update product " + menu_productName.getText() + "?");
                 Optional<ButtonType> option = alert.showAndWait();
 
                 if(option.get().equals(ButtonType.OK)){
