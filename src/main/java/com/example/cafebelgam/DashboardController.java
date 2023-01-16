@@ -37,64 +37,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DashboardController implements Initializable {
-
-    @FXML
-    private Button close;
-
-    @FXML
-    private Button coupons_add;
-
-    @FXML
-    private Button coupons_btn;
-
-    @FXML
-    private Button coupons_clear;
-
-    @FXML
-    private TableColumn<?, ?> coupons_col_couponID;
-
-    @FXML
-    private TableColumn<?, ?> coupons_col_couponName;
-
-    @FXML
-    private TableColumn<?, ?> coupons_col_price;
-
-    @FXML
-    private TableColumn<?, ?> coupons_col_productName;
-
-    @FXML
-    private TableColumn<?, ?> coupons_col_status;
-
-    @FXML
-    private TextField coupons_couponID;
-
-    @FXML
-    private TextField coupons_couponName;
-
-    @FXML
-    private Button coupons_delete;
-
-    @FXML
-    private AnchorPane coupons_form;
-
-    @FXML
-    private TextField coupons_price;
-
-    @FXML
-    private ComboBox<?> coupons_productType;
-
-    @FXML
-    private TextField coupons_search;
-
-    @FXML
-    private ComboBox<?> coupons_status;
-
-    @FXML
-    private TableView<?> coupons_tableView;
-
-    @FXML
-    private Button coupons_update;
-
     @FXML
     private Button customers_btn;
 

@@ -122,9 +122,6 @@ public class UserController implements Initializable {
     private TextField reservations_size;
 
     @FXML
-    private Button reservations_clear;
-
-    @FXML
     private TableColumn<Reservations, String> reservations_col_status;
 
     @FXML
@@ -133,20 +130,14 @@ public class UserController implements Initializable {
     @FXML
     private TableColumn<Reservations, String> reservations_col_type;
 
-    @FXML
-    private Button reservations_delete;
 
     @FXML
     private AnchorPane reservations_form;
 
-    @FXML
-    private Button reservations_reserve;
 
     @FXML
     private ComboBox<?> reservations_tableNumber;
 
-    @FXML
-    private ComboBox<?> reservations_date;
 
     @FXML
     private TableView<Reservations> reservations_tableView;
@@ -160,8 +151,6 @@ public class UserController implements Initializable {
     @FXML
     private AnchorPane main_form;
 
-    @FXML
-    private Label orders_productID;
 
     @FXML
     private TableColumn<OrdersUser, String> status_col_price;
@@ -286,7 +275,7 @@ public class UserController implements Initializable {
 
                     prepared.executeUpdate();
 
-                    reservationsDisplayData();
+                    reservationShow();
                     reservationTableNumber();
                 }else{
                     alert = new Alert(Alert.AlertType.ERROR);
@@ -458,57 +447,6 @@ public class UserController implements Initializable {
             e.printStackTrace();
         }
     }
-
-
-    //DISPLAYING TABLES DATA IN APP
-
-    private ObservableList<Reservations> reservationsData;
-    public void reservationsDisplayData(){
-        reservationsData = reservationsUserList();
-
-        reservations_col_tableNumber.setCellValueFactory(new PropertyValueFactory<>("tableNumber"));
-        reservations_col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
-        reservations_col_status.setCellValueFactory(new PropertyValueFactory<>("status"));
-
-        reservations_tableView.setItems(reservationsData);
-    }
-
-    public ObservableList<Reservations> reservationsUserList(){
-
-        ordersCustomerID();
-
-        ObservableList<Reservations> listData = FXCollections.observableArrayList();
-
-        String sql = "SELECT * FROM reservations WHERE user_id = '" + userId + "'";
-
-        connection = Database.connectDb();
-
-        try{
-
-            prepared = connection.prepareStatement(sql);
-            result = prepared.executeQuery();
-
-            Reservations reservations;
-
-            while(result.next()){
-                reservations = new Reservations(result.getInt("id"),
-                        result.getInt("user_id"),
-                        result.getInt("id"),
-                        result.getString("type"),
-                        result.getString("status"),
-                        result.getDate("date"));
-
-                listData.add(reservations);
-            }
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-
-
-        return listData;
-    }
-
 
     // ORDERS PRODUCTID SELECTOR FROM DATABASE MENU AND SETING CHECKBOX FPR PRODUCT NAME
 
@@ -1185,7 +1123,7 @@ public class UserController implements Initializable {
         menuSearch();
 
         reservationTableNumber();
-        reservationsDisplayData();
+        reservationShow();
         reservationShow();
 
         orderDisplayData();
