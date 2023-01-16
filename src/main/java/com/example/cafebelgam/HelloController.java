@@ -26,9 +26,6 @@ public class HelloController implements Initializable {
     @FXML
     private AnchorPane sign_form;
     @FXML
-    private Button signIn_close;
-
-    @FXML
     private Hyperlink signIn_createAccount;
 
     @FXML
@@ -36,10 +33,6 @@ public class HelloController implements Initializable {
 
     @FXML
     private Button signIn_loginBtn;
-
-    @FXML
-    private Button signIn_minimize;
-
     @FXML
     private PasswordField signIn_password;
 
@@ -50,19 +43,10 @@ public class HelloController implements Initializable {
     private Hyperlink signUp_alreadyHaveAccount;
 
     @FXML
-    private Button signUp_btn;
-
-    @FXML
-    private Button signUp_close;
-
-    @FXML
     private TextField signUp_email;
 
     @FXML
     private AnchorPane signUp_form;
-
-    @FXML
-    private Button signUp_minimize;
 
     @FXML
     private PasswordField signUp_password;
@@ -72,7 +56,6 @@ public class HelloController implements Initializable {
 
     private Connection connection;
     private PreparedStatement prepared;
-
     private Statement statement;
     private ResultSet result;
 
@@ -143,7 +126,6 @@ public class HelloController implements Initializable {
                         alert.setHeaderText(null);
                         alert.setContentText("This username was already exist");
                         alert.showAndWait();
-                        System.out.println("wiecej niz 0");
                     }else{
 
                         prepared.execute();

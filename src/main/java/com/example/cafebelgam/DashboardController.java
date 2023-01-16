@@ -19,13 +19,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import net.sf.jasperreports.view.JasperViewer;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -37,63 +30,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DashboardController implements Initializable {
-
-    @FXML
-    private Button close;
-
-    @FXML
-    private Button coupons_add;
-
-    @FXML
-    private Button coupons_btn;
-
-    @FXML
-    private Button coupons_clear;
-
-    @FXML
-    private TableColumn<?, ?> coupons_col_couponID;
-
-    @FXML
-    private TableColumn<?, ?> coupons_col_couponName;
-
-    @FXML
-    private TableColumn<?, ?> coupons_col_price;
-
-    @FXML
-    private TableColumn<?, ?> coupons_col_productName;
-
-    @FXML
-    private TableColumn<?, ?> coupons_col_status;
-
-    @FXML
-    private TextField coupons_couponID;
-
-    @FXML
-    private TextField coupons_couponName;
-
-    @FXML
-    private Button coupons_delete;
-
-    @FXML
-    private AnchorPane coupons_form;
-
-    @FXML
-    private TextField coupons_price;
-
-    @FXML
-    private ComboBox<?> coupons_productType;
-
-    @FXML
-    private TextField coupons_search;
-
-    @FXML
-    private ComboBox<?> coupons_status;
-
-    @FXML
-    private TableView<?> coupons_tableView;
-
-    @FXML
-    private Button coupons_update;
 
     @FXML
     private Button customers_btn;
@@ -132,9 +68,6 @@ public class DashboardController implements Initializable {
     private TableColumn<OrdersUser, String> customers_col_relase;
 
     @FXML
-    private Button customers_update;
-
-    @FXML
     private ComboBox<?> customers_relase;
 
     @FXML
@@ -142,9 +75,6 @@ public class DashboardController implements Initializable {
 
     @FXML
     private AnchorPane customers_form;
-
-    @FXML
-    private TextField customers_serach;
 
     @FXML
     private TableView<OrdersUser> customers_tableView;
@@ -174,13 +104,7 @@ public class DashboardController implements Initializable {
     private AnchorPane main_form;
 
     @FXML
-    private Button menu_add;
-
-    @FXML
     private Button menu_btn;
-
-    @FXML
-    private Button menu_clear;
 
     @FXML
     private TableColumn<Menus, String> menu_col_price;
@@ -196,9 +120,6 @@ public class DashboardController implements Initializable {
 
     @FXML
     private TableColumn<Menus, String> menu_col_type;
-
-    @FXML
-    private Button menu_delete;
 
     @FXML
     private AnchorPane menu_form;
@@ -223,37 +144,13 @@ public class DashboardController implements Initializable {
     private ComboBox<String> menu_type;
 
     @FXML
-    private Button menu_update;
-
-    @FXML
-    private Button minimize;
-
-    @FXML
     private Label nav_username;
-
-    @FXML
-    private Button order_add;
-
-    @FXML
-    private Button order_delete;
-
-    @FXML
-    private Button order_pay;
-
-    @FXML
-    private ComboBox<?> order_productID;
 
     @FXML
     private ComboBox<?> order_productName;
 
     @FXML
     private Spinner<Integer> order_quantity;
-
-    @FXML
-    private Button order_receipt;
-
-    @FXML
-    private Button order_remove;
 
     @FXML
     private Label order_total;
@@ -283,19 +180,7 @@ public class DashboardController implements Initializable {
     private AnchorPane orders_form;
 
     @FXML
-    private TextField orders_search;
-
-    @FXML
     private TableView<OrdersUser> orders_tableView;
-
-    @FXML
-    private Button reservation_add;
-
-    @FXML
-    private Button reservation_clear;
-
-    @FXML
-    private Button reservation_delete;
 
     @FXML
     private ComboBox<String> reservation_status;
@@ -305,9 +190,6 @@ public class DashboardController implements Initializable {
 
     @FXML
     private ComboBox<String> reservation_type;
-
-    @FXML
-    private Button reservation_update;
 
     @FXML
     private Button reservations_btn;
@@ -1003,7 +885,7 @@ public class DashboardController implements Initializable {
 
     private String[] typesRe = {"2 - person", "4 - person", "6 - person", "8 - person"};
 
-    public void reservationsTypes(){
+    public void reservationTypes(){
         List<String> listTypesRe = new ArrayList<>();
 
         for(String data: typesRe){
@@ -1015,7 +897,7 @@ public class DashboardController implements Initializable {
     }
     private String[] statusRe = {"Reserved", "Not reserved"};
 
-    public void reservationsStatus(){
+    public void reservationStatus(){
         List<String> listStatusRe = new ArrayList<>();
 
         for(String data: statusRe){
@@ -1600,21 +1482,6 @@ public class DashboardController implements Initializable {
         customers_relase.setItems((listData));
     }
 
-// SELECT FROM TABLE CUSTOMERS
-
-    public void customersSelect(){
-
-        OrdersUser orderuser = customers_tableView.getSelectionModel().getSelectedItem();
-
-        int i = customers_tableView.getSelectionModel().getSelectedIndex();
-
-        if((i - 1) < - 1){
-            return;
-        }
-
-        customers_relaseField.setText(String.valueOf(orderuser.getCustomerId()));
-    }
-
     //SEARCH MENU
 
     public void menuSearch(){
@@ -1855,8 +1722,8 @@ public class DashboardController implements Initializable {
         menuClear();
         menuSearch();
 
-        reservationsStatus();
-        reservationsTypes();
+        reservationStatus();
+        reservationTypes();
         reservationShow();
         reservationsSearch();
 

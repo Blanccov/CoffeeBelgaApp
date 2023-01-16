@@ -96,7 +96,7 @@
                         </Label>
                         <Button fx:id="reservations_reserve" layoutX="33.0" layoutY="241.0" mnemonicParsing="false" onAction="#reservationAdd" prefHeight="46.0" prefWidth="198.0" styleClass="menu-btn" stylesheets="@designMainpanel.css" text="Reserve" />
                         <Button fx:id="reservations_clear" layoutX="33.0" layoutY="301.0" mnemonicParsing="false" onAction="#reservationClear" prefHeight="46.0" prefWidth="198.0" styleClass="menu-btn" stylesheets="@designMainpanel.css" text="Unreserve" />
-                        <ComboBox fx:id="reservations_tableNumber" layoutX="55.0" layoutY="102.0" onAction="#reservationsSize" prefWidth="150.0" promptText="Choose" />
+                        <ComboBox fx:id="reservations_tableNumber" layoutX="55.0" layoutY="102.0" onAction="#reservationSize" prefWidth="150.0" promptText="Choose" />
                         <Label layoutX="55.0" layoutY="141.0" text="Table size:">
                            <font>
                               <Font name="System Bold" size="16.0" />

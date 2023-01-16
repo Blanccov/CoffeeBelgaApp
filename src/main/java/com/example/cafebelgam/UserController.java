@@ -42,10 +42,6 @@ public class UserController implements Initializable {
 
     @FXML
     private TableColumn<?, ?> menu_col_productName;
-
-    @FXML
-    private TableColumn<?, ?> menu_col_status;
-
     @FXML
     private TableColumn<?, ?> menu_col_type;
 
@@ -57,18 +53,6 @@ public class UserController implements Initializable {
 
     @FXML
     private TableView<Menus> menu_tableView;
-
-    @FXML
-    private Button minimize;
-
-    @FXML
-    private Button orders_add;
-
-    @FXML
-    private TextField orders_amount;
-
-    @FXML
-    private Label orders_balance;
 
     @FXML
     private Button orders_btn;
@@ -95,19 +79,10 @@ public class UserController implements Initializable {
     private AnchorPane orders_form;
 
     @FXML
-    private Button orders_pay;
-
-    @FXML
     private ComboBox<?> orders_productName;
 
     @FXML
     private Spinner<Integer> orders_quantity;
-
-    @FXML
-    private Button orders_receipt;
-
-    @FXML
-    private Button orders_remove;
 
     @FXML
     private TableView<OrdersUser> orders_tableView;
@@ -122,9 +97,6 @@ public class UserController implements Initializable {
     private TextField reservations_size;
 
     @FXML
-    private Button reservations_clear;
-
-    @FXML
     private TableColumn<Reservations, String> reservations_col_status;
 
     @FXML
@@ -134,19 +106,10 @@ public class UserController implements Initializable {
     private TableColumn<Reservations, String> reservations_col_type;
 
     @FXML
-    private Button reservations_delete;
-
-    @FXML
     private AnchorPane reservations_form;
 
     @FXML
-    private Button reservations_reserve;
-
-    @FXML
     private ComboBox<?> reservations_tableNumber;
-
-    @FXML
-    private ComboBox<?> reservations_date;
 
     @FXML
     private TableView<Reservations> reservations_tableView;
@@ -159,9 +122,6 @@ public class UserController implements Initializable {
 
     @FXML
     private AnchorPane main_form;
-
-    @FXML
-    private Label orders_productID;
 
     @FXML
     private TableColumn<OrdersUser, String> status_col_price;
@@ -286,7 +246,7 @@ public class UserController implements Initializable {
 
                     prepared.executeUpdate();
 
-                    reservationsDisplayData();
+                    reservationShow();
                     reservationTableNumber();
                 }else{
                     alert = new Alert(Alert.AlertType.ERROR);
@@ -303,7 +263,7 @@ public class UserController implements Initializable {
 
     //TABLE SIZE
 
-    public void reservationsSize(){
+    public void reservationSize(){
 
         String sql = "SELECT type FROM tables WHERE id = '"+ reservations_tableNumber.getSelectionModel().getSelectedItem() + "'";
 
@@ -459,55 +419,6 @@ public class UserController implements Initializable {
         }
     }
 
-
-    //DISPLAYING TABLES DATA IN APP
-
-    private ObservableList<Reservations> reservationsData;
-    public void reservationsDisplayData(){
-        reservationsData = reservationsUserList();
-
-        reservations_col_tableNumber.setCellValueFactory(new PropertyValueFactory<>("tableNumber"));
-        reservations_col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
-        reservations_col_status.setCellValueFactory(new PropertyValueFactory<>("status"));
-
-        reservations_tableView.setItems(reservationsData);
-    }
-
-    public ObservableList<Reservations> reservationsUserList(){
-
-        ordersCustomerID();
-
-        ObservableList<Reservations> listData = FXCollections.observableArrayList();
-
-        String sql = "SELECT * FROM reservations WHERE user_id = '" + userId + "'";
-
-        connection = Database.connectDb();
-
-        try{
-
-            prepared = connection.prepareStatement(sql);
-            result = prepared.executeQuery();
-
-            Reservations reservations;
-
-            while(result.next()){
-                reservations = new Reservations(result.getInt("id"),
-                        result.getInt("user_id"),
-                        result.getInt("id"),
-                        result.getString("type"),
-                        result.getString("status"),
-                        result.getDate("date"));
-
-                listData.add(reservations);
-            }
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-
-
-        return listData;
-    }
 
 
     // ORDERS PRODUCTID SELECTOR FROM DATABASE MENU AND SETING CHECKBOX FPR PRODUCT NAME
@@ -1185,7 +1096,6 @@ public class UserController implements Initializable {
         menuSearch();
 
         reservationTableNumber();
-        reservationsDisplayData();
         reservationShow();
 
         orderDisplayData();
